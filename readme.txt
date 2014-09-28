@@ -1,5 +1,5 @@
 === Icons for Features ===
-Contributors: woothemes,mattyza
+Contributors: woothemes,mattyza,danieldudzic
 Donate link: http://woothemes.com/
 Tags: features,icons,font-awesome
 Requires at least: 3.8.1
@@ -61,6 +61,9 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 = 1.1.0 =
 * 2015-07-30
 * Adds a URL link to the icon.
+* 2014-09-28
+* Adds Color Picker support, which allows to easily select colors for the icons. 
+
 
 = 1.0.1 =
 * 2015-04-22
@@ -71,10 +74,11 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 * Initial release. Woo!
 
 == Changelog ==
-
 = 1.1.0 =
 * 2015-07-30
 * Adds a URL link to the icon.
+* 2014-09-28
+* Adds Color Picker support. 
 
 = 1.0.1 =
 * 2015-04-22

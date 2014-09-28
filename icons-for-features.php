@@ -268,15 +268,17 @@ final class Icons_For_Features {
 		if ( is_null( $post_id ) ) $post_id = get_the_ID();
 		$response = '';
 
+		$icon_color_html = '';
 		$icon = get_post_meta( intval( $post_id ), '_icon', true );
 		$url = get_post_meta( intval( $post_id ), '_url', true );
 		$title = get_the_title( intval( $post_id ) );
-
+        $icon_color = get_post_meta( intval( $post_id ), '_icon_color', true );
+        if ( '' != $icon_color ) { $icon_color_html = 'style="color: ' . esc_attr( $icon_color ) . ';"'; }
 		if ( '' != $icon && in_array( $icon, $this->get_supported_icon_list() ) ) {
 			if ( '' != $url ) {
 				$response = '<a title="' . esc_attr ( $title ) . '" href="' . esc_url( $url ) . '"><div class="icon-preview fa ' . esc_attr( $icon ) . '"></div></a>' . "\n";
 			} else {
-				$response = '<div class="icon-preview fa ' . esc_attr( $icon ) . '"></div>' . "\n";
+			$response = '<div class="icon-preview fa ' . esc_attr( $icon ) . '" ' . $icon_color_html . '></div>' . "\n";
 			}
 		}
 		return (string)apply_filters( 'icons_for_features_get_the_icon_html', $response );
