@@ -276,7 +276,7 @@ final class Icons_For_Features {
         if ( '' != $icon_color ) { $icon_color_html = 'style="color: ' . esc_attr( $icon_color ) . ';"'; }
 		if ( '' != $icon && in_array( $icon, $this->get_supported_icon_list() ) ) {
 			if ( '' != $url ) {
-				$response = '<a title="' . esc_attr ( $title ) . '" href="' . esc_url( $url ) . '"><div class="icon-preview fa ' . esc_attr( $icon ) . '"></div></a>' . "\n";
+				$response = '<a title="' . esc_attr ( $title ) . '" href="' . esc_url( $url ) . '"><div class="icon-preview fa ' . esc_attr( $icon ) . '" ' . $icon_color_html . '></div></a>' . "\n";
 			} else {
 			$response = '<div class="icon-preview fa ' . esc_attr( $icon ) . '" ' . $icon_color_html . '></div>' . "\n";
 			}
