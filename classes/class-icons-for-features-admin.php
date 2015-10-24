@@ -169,6 +169,7 @@ class Icons_For_Features_Admin {
 	 * @access public
 	 * @since  1.1.0
 	 * @return void
+     * @todo Remove deprecated call to get_supported_icon_list
 	 */
 	public function meta_box_content () {
 		global $post_id;
