@@ -192,16 +192,16 @@ class Icons_For_Features_Admin {
 
 		$html .= '<input type="text" name="icon" value="'.$icon.'" class="feature-icon-selector">' . "\n"; // $icon _is_ already escaped or empty, no need for double escaping
 
-		$html .= '<input type="hidden" name="currently-selected-icon" class="currently-selected-icon" value="' . esc_attr( $icon ) . '" />' . "\n";
+		$html .= '<input type="hidden" name="currently-selected-icon" class="currently-selected-icon" value="' . $icon . '" />' . "\n";
 
 		$html .= '<p><small>' . __( '(When an icon is selected, it takes the place of the featured image.)', 'icons-for-features' ) . '</small></p>' . "\n";
 
 		// Allow themes/plugins to disable the color picker.
 		if ( apply_filters( 'icons_for_features_icon_color', true ) ) {
 
-			$html .= '<input name="icon_color" type="text" value="' . esc_attr( $icon_color ) . '" class="feature-icon-color" data-default-color="false" />' . "\n";
+			$html .= '<input name="icon_color" type="text" value="' . $icon_color . '" class="feature-icon-color" data-default-color="false" />' . "\n"; // _is_ already escaped or empty, no need for double escaping
 
-			$html .= '<input type="hidden" name="currently-selected-icon-color" class="currently-selected-icon-color" value="' . esc_attr( $icon_color ) . '" />' . "\n";
+			$html .= '<input type="hidden" name="currently-selected-icon-color" class="currently-selected-icon-color" value="' .  $icon_color  . '" />' . "\n";
 
 		}
 
@@ -265,11 +265,7 @@ class Icons_For_Features_Admin {
 		switch ( $column_name ) {
 
 			case 'icon':
-				$value = '';
-
-				$value = Icons_For_Features()->get_the_icon_html( $id );
-
-				echo $value;
+				echo Icons_For_Features()->get_the_icon_html( $id );
 			break;
 
 			default:
@@ -308,4 +304,3 @@ class Icons_For_Features_Admin {
 		return $defaults;
 	} // End register_custom_column_headings()
 } // End Class
-?>
