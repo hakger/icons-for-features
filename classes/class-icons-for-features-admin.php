@@ -174,14 +174,8 @@ class Icons_For_Features_Admin {
 	public function meta_box_content () {
 		global $post_id;
 		$fields = get_post_custom( $post_id );
-		$icons = Icons_For_Features()->get_supported_icon_list();
 
-		if ( 0 >= count( $icons ) ) {
-			_e( 'No icons are currently supported.', 'icons-for-features' );
-			return;
-		}
-
-		$icon = 'fa-no-feature-icon';
+		$icon = '';
 		if ( isset( $fields['_icon'][0] ) ) {
 			$icon = esc_attr( $fields['_icon'][0] );
 		}
@@ -196,17 +190,7 @@ class Icons_For_Features_Admin {
 
 		$html = '<input type="hidden" name="woo_' . $this->token . '_noonce" id="woo_' . $this->token . '_noonce" value="' . wp_create_nonce( $this->token ) . '" />';
 
-		$html .= '<div class="icon-preview fa ' . esc_attr( $icon ) . '" ' . $icon_color_html . '></div>';
-
-		$html .= '<select name="icon" class="feature-icon-selector">' . "\n";
-			$html .= '<option value="">' . __( 'No Icon', 'icons-for-features' ) . '</option>' . "\n";
-		foreach ( $icons as $k => $v ) {
-			$html .= '<option value="' . esc_attr( $v ) . '"' . selected( $icon, $v, false ) . '>' . esc_html( Icons_For_Features()->get_icon_label( $v ) ) . '</option>' . "\n";
-		}
-		$html .= '</select>' . "\n";
-
-		// Make sure this variable is empty, to ensure we have an empty hidden field.
-		if ( 'fa-no-featured-icon' == $icon ) $icon = '';
+		$html .= '<input type="text" name="icon" value="'.$icon.'" class="feature-icon-selector">' . "\n"; // $icon _is_ already escaped or empty, no need for double escaping
 
 		$html .= '<input type="hidden" name="currently-selected-icon" class="currently-selected-icon" value="' . esc_attr( $icon ) . '" />' . "\n";
 
