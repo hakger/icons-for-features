@@ -194,7 +194,7 @@ class Icons_For_Features_Admin {
 
 		$html .= '<input type="hidden" name="currently-selected-icon" class="currently-selected-icon" value="' . $icon . '" />' . "\n";
 
-		$html .= '<p><small>' . __( '(When an icon is selected, it takes the place of the featured image.)', 'icons-for-features' ) . '</small></p>' . "\n";
+		$html .= '<p><small>' . __( '(Search for icon in fontawesome.io/icons and enter it\'s name in above field.)', 'icons-for-features' ) . '</small></p>' . "\n";
 
 		// Allow themes/plugins to disable the color picker.
 		if ( apply_filters( 'icons_for_features_icon_color', true ) ) {
