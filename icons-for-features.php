@@ -241,8 +241,13 @@ final class Icons_For_Features {
 	public function register_styles () {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		wp_register_style( $this->token . '-icons', esc_url( $this->plugin_url . 'assets/lib/font-awesome/css/font-awesome' . $suffix . '.css' ), array(), '4.0.3', 'all' );
-		wp_register_style( $this->token . '-icons-loader', esc_url( $this->plugin_url . 'assets/css/style.css' ), array( $this->token . '-icons' ), $this->version, 'all' );
-		wp_register_style( $this->token . '-icons-admin', esc_url( $this->plugin_url . 'assets/css/admin.css' ), array( $this->token . '-icons' ), $this->version, 'all' );
+        $dependency = array();
+        if(false){
+            $dependency = array($this->token . '-icons');
+        }
+		wp_register_style( $this->token . '-icons-loader', esc_url( $this->plugin_url . 'assets/css/style.css' ), $dependency, $this->version, 'all' );
+		wp_register_style( $this->token . '-icons-admin', esc_url( $this->plugin_url . 'assets/css/admin.css' ), $dependency, $this->version, 'all' );
+
 	} // End register_styles()
 
 	/**
