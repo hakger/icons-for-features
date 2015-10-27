@@ -30,7 +30,7 @@ class Icons_For_Features_Admin {
 	public function __construct () {
 		$this->token = 'icons-for-features';
 
-		add_action( 'admin_menu', array( $this, 'meta_box_setup' ), 20 );
+		add_action( 'add_meta_boxes_feature', array( $this, 'meta_box_setup' ), 20 );
 		add_action( 'save_post', array( $this, 'meta_box_save' ) );
 
 		// Register necessary scripts and styles, to enable others to enqueue them at will as well.
