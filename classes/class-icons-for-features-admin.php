@@ -189,13 +189,9 @@ class Icons_For_Features_Admin {
 		}
 
 		$html = '<input type="hidden" name="woo_' . $this->token . '_noonce" id="woo_' . $this->token . '_noonce" value="' . wp_create_nonce( $this->token ) . '" />';
-
+        $html .= '<p><small>' . __( '(Search for icon in <a href="http://fontawesome.io/icons/">fontawesome.io/icons</a> and enter it\'s name in field below.)', 'icons-for-features' ) . '</small></p>' . "\n";
 		$html .= '<input type="text" name="icon" value="'.$icon.'" class="feature-icon-selector">' . "\n"; // $icon _is_ already escaped or empty, no need for double escaping
-
 		$html .= '<input type="hidden" name="currently-selected-icon" class="currently-selected-icon" value="' . $icon . '" />' . "\n";
-
-		$html .= '<p><small>' . __( '(Search for icon in <a href="http://fontawesome.io/icons/">fontawesome.io/icons</a> and enter it\'s name in above field.)', 'icons-for-features' ) . '</small></p>' . "\n";
-
 		// Allow themes/plugins to disable the color picker.
 		if ( apply_filters( 'icons_for_features_icon_color', true ) ) {
 
