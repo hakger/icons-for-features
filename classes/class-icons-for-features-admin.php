@@ -20,6 +20,15 @@ class Icons_For_Features_Admin {
 	 * @since   1.0.0
 	 */
 	public $token;
+    
+    /**
+     * Default options
+     * 
+     * @var array rray of default options
+     * @access private
+     * @since 2.0.0
+     */
+    private $defaults;
 
 	/**
 	 * Constructor function.
@@ -46,6 +55,10 @@ class Icons_For_Features_Admin {
 
 		// Process the 'Dismiss' link, if valid.
 		add_action( 'admin_init', array( $this, 'maybe_process_dismiss_link' ) );
+        
+        // Display Icons options for embedding styles
+        
+        add_action( 'admin_menu', array($this, 'admin_menu'));
 	} // End __construct()
 
 	/**
@@ -299,4 +312,69 @@ class Icons_For_Features_Admin {
 
 		return $defaults;
 	} // End register_custom_column_headings()
+    
+    /**
+     * Add option to Features menu
+     * 
+     * @access public
+     * @since 2.0.0
+     * @return null
+     * 
+     */
+    public function admin_menu(){
+        add_submenu_page( 'edit.php?post_type=feature', 'Features Icons', 'Icons', 'edit_theme_options', 'icons-for-features-options', array( $this, 'admin_menu_cb' ) );
+    }
+
+    public function admin_menu_cb(){
+        if( $_POST && check_admin_referer( 'woo-' . $this->token . '-options-nonce' ) ){
+            $settings = array();
+            switch( $_POST[ $this->token . '_location' ] ){
+                case 'local':
+                case 'maxcdn':
+                case 'none':
+                    $settings[ 'stylesheet' ] = $_POST[ $this->token . '_location' ];
+                    break;
+                case 'other':
+                    $settings[ 'stylesheet' ] = 'other';
+                    $settings[ 'stylesheet_location' ] = sanitize_text_field( $_POST[ $this->token . '_location-other-location' ] );
+                    break;
+            }
+            if( isset( $_POST[ $this->token . '_text_spacing' ] ) ){
+                $settings[ 'spacing' ] = 1;
+            } else {
+                $settings[ 'spacing' ] = 0;
+            }
+            update_option( $this->token . '-options', $settings );
+            print '<div class="updated"><p>Your settings have been saved!</p></div>';
+        }
+        $settings = get_option( $this->token . '-options', $this->defaults );
+        print ' <div class="wrap">
+                    <h2>'.get_admin_page_title().'</h2>
+                    <p>Thank you for using Icons For Features! To view available icons, <a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">click here to visit the Font Awesome website</a>.</p>
+                    <form action="'.admin_url( 'edit.php?post_type=feature&page=icons-for-features-options' ).'" method="post">
+                        <h3>Stylesheet</h3>
+                        <p>Select how you want stylesheet loaded on your site (if at all):</p>
+                        <table class="form-table">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Load Font Awesome stylesheet From:</th>
+                                    <td>
+                                        <fieldset>
+                                            <legend class="screen-reader-text"><span>Load Font Awesome 4 From</span></legend>
+                                            <label for="' . $this->token . '_location-local"><input type="radio" name="' . $this->token . '_location" id="' . $this->token . '_location-local" value="local"'.( 'local' == $settings[ 'stylesheet' ] ? ' checked' : false ).'> Local plugin folder (default)</label>
+                                            <br />
+                                            <label for="' . $this->token . '_location-maxcdn"><input type="radio" name="' . $this->token . '_location" id="' . $this->token . '_location-maxcdn" value="maxcdn"'.( 'maxcdn' == $settings[ 'stylesheet' ] ? ' checked' : false ).'> Official Font Awesome CDN <span class="description">(<a href="http://www.bootstrapcdn.com/#fontawesome_tab" target="_blank">Bootstrap CDN powered by MaxCDN</a>)</span></label>
+                                            <br />
+                                            <label for="' . $this->token . '_location-other"><input type="radio" name="' . $this->token . '_location" id="' . $this->token . '_location-other" value="other"'.( 'other' == $settings[ 'stylesheet' ] ? ' checked' : false ).'> A custom location:</label> <input type="text" name="' . $this->token . '_location-other-location" id="' . $this->token . '_location-other-location" placeholder="Enter full url here" class="regular-text" value="'.( isset( $settings[ 'stylesheet_location' ] ) ? $settings[ 'stylesheet_location' ] : '' ).'">
+                                            <br />
+                                            <label for="' . $this->token . '_location-none"><input type="radio" name="' . $this->token . '_location" id="' . $this->token . '_location-none" value="none"'.( 'none' == $settings[ 'stylesheet' ] ? ' checked' : false ).'>Don&#8217;t load Font Awesome 4&#8217;s stylesheet <span class="description">(use this if you load Font Awesome 4 elsewhere on your site)</span></label>
+                                        </fieldset>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>'.wp_nonce_field( 'woo-' . $this->token . '-options-nonce' ).'<button type="submit" class="button button-primary">Save Settings</button></p>
+                    </form>
+                </div>';
+    }
 } // End Class
