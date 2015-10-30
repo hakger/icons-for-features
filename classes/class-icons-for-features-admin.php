@@ -339,11 +339,6 @@ class Icons_For_Features_Admin {
                     $settings[ 'stylesheet_location' ] = sanitize_text_field( $_POST[ $this->token . '_location-other-location' ] );
                     break;
             }
-            if( isset( $_POST[ $this->token . '_text_spacing' ] ) ){
-                $settings[ 'spacing' ] = 1;
-            } else {
-                $settings[ 'spacing' ] = 0;
-            }
             update_option( $this->token . '-options', $settings );
             print '<div class="updated"><p>Your settings have been saved!</p></div>';
         }
