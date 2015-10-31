@@ -338,6 +338,13 @@ class Icons_For_Features_Admin {
                     $settings[ 'stylesheet' ] = 'other';
                     $settings[ 'stylesheet_location' ] = sanitize_text_field( $_POST[ $this->token . '_location-other-location' ] );
                     break;
+                default :
+                    $settings[ 'stylesheet' ] = 'local';
+            }
+            if( in_array( $_POST[$this->token.'_adminlocation'], array('local','same','none') ) ){
+                $settings['stylesheet-admin'] = $_POST[$this->token.'_adminlocation'];
+            } else {
+                $settings['stylesheet-admin'] = 'local';
             }
             update_option( $this->token . '-options', $settings );
             print '<div class="updated"><p>Your settings have been saved!</p></div>';
@@ -352,17 +359,30 @@ class Icons_For_Features_Admin {
                         <table class="form-table">
                             <tbody>
                                 <tr>
-                                    <th scope="row">Load Font Awesome stylesheet From:</th>
+                                    <th scope="row">Load Font Awesome stylesheet everywhere except admin From:</th>
                                     <td>
                                         <fieldset>
                                             <legend class="screen-reader-text"><span>Load Font Awesome 4 From</span></legend>
-                                            <label for="' . $this->token . '_location-local"><input type="radio" name="' . $this->token . '_location" id="' . $this->token . '_location-local" value="local"'.( 'local' == $settings[ 'stylesheet' ] ? ' checked' : false ).'> Local plugin folder (default)</label>
+                                            <label for="' . $this->token . '_location-local"><input type="radio" name="' . $this->token . '_location" id="' . $this->token . '_location-local" value="local"'.( 'local' == $settings[ 'stylesheet' ] ? ' checked' : false ).'> Local plugin folder</label>
                                             <br />
                                             <label for="' . $this->token . '_location-maxcdn"><input type="radio" name="' . $this->token . '_location" id="' . $this->token . '_location-maxcdn" value="maxcdn"'.( 'maxcdn' == $settings[ 'stylesheet' ] ? ' checked' : false ).'> Official Font Awesome CDN <span class="description">(<a href="http://www.bootstrapcdn.com/#fontawesome_tab" target="_blank">Bootstrap CDN powered by MaxCDN</a>)</span></label>
                                             <br />
                                             <label for="' . $this->token . '_location-other"><input type="radio" name="' . $this->token . '_location" id="' . $this->token . '_location-other" value="other"'.( 'other' == $settings[ 'stylesheet' ] ? ' checked' : false ).'> A custom location:</label> <input type="text" name="' . $this->token . '_location-other-location" id="' . $this->token . '_location-other-location" placeholder="Enter full url here" class="regular-text" value="'.( isset( $settings[ 'stylesheet_location' ] ) ? $settings[ 'stylesheet_location' ] : '' ).'">
                                             <br />
-                                            <label for="' . $this->token . '_location-none"><input type="radio" name="' . $this->token . '_location" id="' . $this->token . '_location-none" value="none"'.( 'none' == $settings[ 'stylesheet' ] ? ' checked' : false ).'>Don&#8217;t load Font Awesome 4&#8217;s stylesheet <span class="description">(use this if you load Font Awesome 4 elsewhere on your site)</span></label>
+                                            <label for="' . $this->token . '_location-none"><input type="radio" name="' . $this->token . '_location" id="' . $this->token . '_location-none" value="none"'.( 'none' == $settings[ 'stylesheet' ] ? ' checked' : false ).'>Don&#8217;t load Font Awesome 4&#8217;s stylesheet <span class="description">(use this if you load Font Awesome 4 elsewhere on your site)</span> (default setting)</label>
+                                        </fieldset>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Load Font Awesome stylesheet on admin pages From:</th>
+                                    <td>
+                                        <fieldset>
+                                            <legend class="screen-reader-text"><span>Load Font Awesome 4 From</span></legend>
+                                            <label for="' . $this->token . '_adminlocation-local"><input type="radio" name="' . $this->token . '_adminlocation" id="' . $this->token . '_adminlocation-local" value="local"'.( 'local' == $settings[ 'stylesheet-admin' ] ? ' checked' : false ).'> Local plugin folder (default)</label>
+                                            <br />
+                                            <label for="' . $this->token . '_adminlocation-same"><input type="radio" name="' . $this->token . '_adminlocation" id="' . $this->token . '_adminlocation-same" value="same"'.( 'same' == $settings[ 'stylesheet-admin' ] ? ' checked' : false ).'> Same setting as non-admin pages</label>
+                                            <br />
+                                            <label for="' . $this->token . '_adminlocation-none"><input type="radio" name="' . $this->token . '_adminlocation" id="' . $this->token . '_adminlocation-none" value="none"'.( 'none' == $settings[ 'stylesheet-admin' ] ? ' checked' : false ).'>Don&#8217;t load Font Awesome 4&#8217;s stylesheet on admin pages</label>
                                         </fieldset>
                                     </td>
                                 </tr>
