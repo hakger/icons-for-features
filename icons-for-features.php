@@ -239,6 +239,7 @@ final class Icons_For_Features {
 	 * @return void
 	 */
 	public function register_styles () {
+        $settings = $settings = get_option( $this->token . '-options', $this->defaults );
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		wp_register_style( $this->token . '-icons', esc_url( $this->plugin_url . 'assets/lib/font-awesome/css/font-awesome' . $suffix . '.css' ), array(), '4.0.3', 'all' );
         $dependency = array();
