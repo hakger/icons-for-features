@@ -252,17 +252,19 @@ final class Icons_For_Features {
                 $location = $settings['stylesheet_location'];
                 break;
             case 'none':
-                $dependency_pages=array();
+                $dependency_pages = array();
                 break;
             case 'local': //do nothing
             default:
                 break;
         }
+        if('none'===$settings['stylesheet-admin']){
+            $dependency_admin = array();
+        }
 		
 		wp_register_style( $this->token . '-icons', esc_url( $location ), array(), '4.0.3', 'all' );
-        $dependency = array();
 		wp_register_style( $this->token . '-icons-loader', esc_url( $this->plugin_url . 'assets/css/style.css' ), $dependency_pages, $this->version, 'all' );
-		wp_register_style( $this->token . '-icons-admin', esc_url( $this->plugin_url . 'assets/css/admin.css' ), $dependency, $this->version, 'all' );
+		wp_register_style( $this->token . '-icons-admin', esc_url( $this->plugin_url . 'assets/css/admin.css' ), $dependency_admin, $this->version, 'all' );
 
 	} // End register_styles()
 

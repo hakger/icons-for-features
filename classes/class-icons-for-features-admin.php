@@ -341,10 +341,10 @@ class Icons_For_Features_Admin {
                 default :
                     $settings[ 'stylesheet' ] = 'local';
             }
-            if( in_array( $_POST[$this->token.'_adminlocation'], array('local','same','none') ) ){
+            if( in_array( $_POST[$this->token.'_adminlocation'], array('same','none') ) ){
                 $settings['stylesheet-admin'] = $_POST[$this->token.'_adminlocation'];
             } else {
-                $settings['stylesheet-admin'] = 'local';
+                $settings['stylesheet-admin'] = 'same';
             }
             update_option( $this->token . '-options', $settings );
             print '<div class="updated"><p>Your settings have been saved!</p></div>';
@@ -378,9 +378,7 @@ class Icons_For_Features_Admin {
                                     <td>
                                         <fieldset>
                                             <legend class="screen-reader-text"><span>Load Font Awesome 4 From</span></legend>
-                                            <label for="' . $this->token . '_adminlocation-local"><input type="radio" name="' . $this->token . '_adminlocation" id="' . $this->token . '_adminlocation-local" value="local"'.( 'local' == $settings[ 'stylesheet-admin' ] ? ' checked' : false ).'> Local plugin folder (default)</label>
-                                            <br />
-                                            <label for="' . $this->token . '_adminlocation-same"><input type="radio" name="' . $this->token . '_adminlocation" id="' . $this->token . '_adminlocation-same" value="same"'.( 'same' == $settings[ 'stylesheet-admin' ] ? ' checked' : false ).'> Same setting as non-admin pages</label>
+                                            <label for="' . $this->token . '_adminlocation-same"><input type="radio" name="' . $this->token . '_adminlocation" id="' . $this->token . '_adminlocation-same" value="same"'.( 'same' == $settings[ 'stylesheet-admin' ] ? ' checked' : false ).'> Same setting as non-admin pages<span class="description">(if non-admin pages have "none" selected, this setting acts as "local" only for admin pages.)</span></label>
                                             <br />
                                             <label for="' . $this->token . '_adminlocation-none"><input type="radio" name="' . $this->token . '_adminlocation" id="' . $this->token . '_adminlocation-none" value="none"'.( 'none' == $settings[ 'stylesheet-admin' ] ? ' checked' : false ).'>Don&#8217;t load Font Awesome 4&#8217;s stylesheet on admin pages</label>
                                         </fieldset>
