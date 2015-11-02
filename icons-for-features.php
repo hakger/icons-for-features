@@ -240,13 +240,28 @@ final class Icons_For_Features {
 	 */
 	public function register_styles () {
         $settings = $settings = get_option( $this->token . '-options', $this->defaults );
-		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-		wp_register_style( $this->token . '-icons', esc_url( $this->plugin_url . 'assets/lib/font-awesome/css/font-awesome' . $suffix . '.css' ), array(), '4.0.3', 'all' );
-        $dependency = array();
-        if(false){
-            $dependency = array($this->token . '-icons');
+        $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+        $location = $this->plugin_url . 'assets/lib/font-awesome/css/font-awesome' . $suffix . '.css';
+        $dependency_pages = array($this->token . '-icons');
+        $dependency_admin = array($this->token . '-icons');
+        switch ($settings['stylesheet']) {
+            case 'maxcdn':
+                $location = 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css';
+                break;
+            case 'other':
+                $location = $settings['stylesheet_location'];
+                break;
+            case 'none':
+                $dependency_pages=array();
+                break;
+            case 'local': //do nothing
+            default:
+                break;
         }
-		wp_register_style( $this->token . '-icons-loader', esc_url( $this->plugin_url . 'assets/css/style.css' ), $dependency, $this->version, 'all' );
+		
+		wp_register_style( $this->token . '-icons', esc_url( $location ), array(), '4.0.3', 'all' );
+        $dependency = array();
+		wp_register_style( $this->token . '-icons-loader', esc_url( $this->plugin_url . 'assets/css/style.css' ), $dependency_pages, $this->version, 'all' );
 		wp_register_style( $this->token . '-icons-admin', esc_url( $this->plugin_url . 'assets/css/admin.css' ), $dependency, $this->version, 'all' );
 
 	} // End register_styles()
