@@ -20,6 +20,15 @@ class Icons_For_Features_Admin {
 	 * @since   1.0.0
 	 */
 	public $token;
+    
+    /**
+     * Default options
+     * 
+     * @var array array of default options
+     * @access private
+     * @since 2.0.0
+     */
+    private $defaults;
 
 	/**
 	 * Constructor function.
@@ -50,6 +59,8 @@ class Icons_For_Features_Admin {
         // Display Icons options for embedding styles
         
         add_action( 'admin_menu', array($this, 'admin_menu'));
+        
+        $this->defaults = call_user_func(array(str_ireplace('_Admin', '', __CLASS__), 'defaults'));
 	} // End __construct()
 
 	/**

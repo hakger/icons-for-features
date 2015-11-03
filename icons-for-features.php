@@ -80,15 +80,6 @@ final class Icons_For_Features {
 	 * @since   1.0.0
 	 */
 	public $hook;
-    
-    /**
-     * Default options
-     * 
-     * @var array array of default options
-     * @access private
-     * @since 2.0.0
-     */
-    private $defaults;
 
 	/**
 	 * Constructor function.
@@ -248,7 +239,7 @@ final class Icons_For_Features {
 	 * @return void
 	 */
 	public function register_styles () {
-        $settings = $settings = get_option( $this->token . '-options', $this->defaults );
+        $settings = $settings = get_option( $this->token . '-options', self::defaults() );
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
         $location = $this->plugin_url . 'assets/lib/font-awesome/css/font-awesome' . $suffix . '.css';
         $dependency_pages = array($this->token . '-icons');
@@ -346,5 +337,13 @@ final class Icons_For_Features {
 	public function get_supported_icon_list () {
 		return array();
 	} // End get_supported_icon_list()
+    
+    public static function defaults () {
+        return array(
+          'stylesheet' => 'local',
+          'stylesheet-admin' => 'same',
+          
+        );
+    }
 } // End Class
 ?>
