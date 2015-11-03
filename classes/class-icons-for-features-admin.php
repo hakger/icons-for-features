@@ -20,15 +20,6 @@ class Icons_For_Features_Admin {
 	 * @since   1.0.0
 	 */
 	public $token;
-    
-    /**
-     * Default options
-     * 
-     * @var array rray of default options
-     * @access private
-     * @since 2.0.0
-     */
-    private $defaults;
 
 	/**
 	 * Constructor function.

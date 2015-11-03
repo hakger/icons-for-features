@@ -80,6 +80,15 @@ final class Icons_For_Features {
 	 * @since   1.0.0
 	 */
 	public $hook;
+    
+    /**
+     * Default options
+     * 
+     * @var array array of default options
+     * @access private
+     * @since 2.0.0
+     */
+    private $defaults;
 
 	/**
 	 * Constructor function.
