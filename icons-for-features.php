@@ -321,16 +321,13 @@ final class Icons_For_Features {
      * @todo Remove/deprecate this as it seems unused
 	 */
 	public function get_icon_label ( $key ) {
-		$label = $key;
-		$label = str_replace( 'fa-', '', $label );
-		$label = str_replace( '-', ' ', $label );
+		$label = str_replace( '-', ' ', str_replace( 'fa-', '', $key ) );
 
 		if ( ' o' == substr( $label, -2 ) ) {
 			$label = substr( $label, 0, ( strlen( $label ) -2 ) );
 		}
 
-		$label = ucwords( $label );
-		return $label;
+		return ucwords( $label );
 	} // End get_icon_label()
 
 	/**
