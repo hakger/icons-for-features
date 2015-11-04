@@ -288,20 +288,25 @@ final class Icons_For_Features {
 	 * @return string       Formatted icon HTML.
 	 */
 	public function get_the_icon_html ( $post_id = null ) {
-		if ( is_null( $post_id ) ) $post_id = get_the_ID();
+		if ( is_null( $post_id ) ) {
+            $post_id = get_the_ID();
+        }
+        
 		$response = '';
-
 		$icon_color_html = '';
 		$icon = get_post_meta( intval( $post_id ), '_icon', true );
 		$url = get_post_meta( intval( $post_id ), '_url', true );
 		$title = get_the_title( intval( $post_id ) );
         $icon_color = get_post_meta( intval( $post_id ), '_icon_color', true );
-        if ( '' != $icon_color ) { $icon_color_html = 'style="color: ' . esc_attr( $icon_color ) . ';"'; }
+        
+        if ( '' != $icon_color ) { 
+            $icon_color_html = 'style="color: ' . esc_attr( $icon_color ) . ';"'; 
+        }
 		if ( '' != $icon ) {
 			if ( '' != $url ) {
 				$response = '<a title="' . esc_attr ( $title ) . '" href="' . esc_url( $url ) . '"><div class="icon-preview fa ' . esc_attr( $icon ) . '" ' . $icon_color_html . '></div></a>' . "\n";
 			} else {
-			$response = '<div class="icon-preview fa ' . esc_attr( $icon ) . '" ' . $icon_color_html . '></div>' . "\n";
+                $response = '<div class="icon-preview fa ' . esc_attr( $icon ) . '" ' . $icon_color_html . '></div>' . "\n";
 			}
 		}
 		return (string)apply_filters( 'icons_for_features_get_the_icon_html', $response );
@@ -313,6 +318,7 @@ final class Icons_For_Features {
 	 * @since  1.0.0
 	 * @param  string $key Given icon key.
 	 * @return string      Formatted icon label.
+     * @todo Remove/deprecate this as it seems unused
 	 */
 	public function get_icon_label ( $key ) {
 		$label = $key;
@@ -338,6 +344,12 @@ final class Icons_For_Features {
 		return array();
 	} // End get_supported_icon_list()
     
+    /**
+	 * Returns default plugin settings.
+	 * @access public
+	 * @since  2.0.0
+	 * @return array Default settings for this plugin.
+	 */
     public static function defaults () {
         return array(
           'stylesheet' => 'local',

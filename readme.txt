@@ -58,6 +58,11 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Upgrade Notice ==
 
+= 2.0.0
+* date(now)
+* Introduce configurable loading of stylesheets for normal/admin pages
+* Update FontAwesome
+
 = 1.1.0 =
 * 2015-07-30
 * Adds a URL link to the icon.
