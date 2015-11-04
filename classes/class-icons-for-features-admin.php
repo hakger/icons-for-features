@@ -87,11 +87,12 @@ class Icons_For_Features_Admin {
 	 * @return  void
 	 */
 	public function maybe_display_activation_notice () {
-		if ( $this->_is_features_plugin_activated() ) return;
-		if ( ! current_user_can( 'manage_options' ) ) return; // Don't show the message if the user isn't an administrator.
-		if ( is_multisite() && ! is_super_admin() ) return; // Don't show the message if on a multisite and the user isn't a super user.
-		if ( true == get_option( 'icons_for_features_dismiss_activation_notice', false ) ) return; // Don't show the message if the user dismissed it.
-
+		if ( $this->_is_features_plugin_activated()    ||
+           ( ! current_user_can( 'manage_options' ) )  || // Don't show the message if the user isn't an administrator.
+		   ( is_multisite() && ! is_super_admin() )    || // Don't show the message if on a multisite and the user isn't a super user.
+           get_option( 'icons_for_features_dismiss_activation_notice', false ) ) { // Don't show the message if the user dismissed it.
+            return;
+        }
 		$slug = 'features-by-woothemes';
 		$install_url = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=' . $slug ), 'install-plugin_' . $slug );
 		$activate_url = 'plugins.php?action=activate&plugin=' . urlencode( 'features-by-woothemes/woothemes-features.php' ) . '&plugin_status=all&paged=1&s&_wpnonce=' . urlencode( wp_create_nonce( 'activate-plugin_features-by-woothemes/woothemes-features.php' ) );
@@ -115,7 +116,9 @@ class Icons_For_Features_Admin {
 	protected function _is_features_plugin_activated () {
 		$response = false;
 		$active_plugins = apply_filters( 'active_plugins', get_option('active_plugins' ) );
-		if ( 0 < count( $active_plugins ) && in_array( 'features-by-woothemes/woothemes-features.php', $active_plugins ) ) $response = true;
+		if ( 0 < count( $active_plugins ) && in_array( 'features-by-woothemes/woothemes-features.php', $active_plugins ) ) {
+            $response = true;
+        }
 		return $response;
 	} // End _is_features_plugin_activated()
 
@@ -128,7 +131,9 @@ class Icons_For_Features_Admin {
 	protected function _is_features_plugin_installed () {
 		$response = false;
 		$plugins = get_plugins();
-		if ( 0 < count( $plugins ) && in_array( 'features-by-woothemes/woothemes-features.php', array_keys( $plugins ) ) ) $response = true;
+		if ( 0 < count( $plugins ) && in_array( 'features-by-woothemes/woothemes-features.php', array_keys( $plugins ) ) ) {
+            $response = true;
+        }
 		return $response;
 	} // End _is_features_plugin_installed()
 
@@ -270,7 +275,9 @@ class Icons_For_Features_Admin {
 	 * @return void
 	 */
 	public function register_custom_columns ( $column_name, $id ) {
-		if ( 'feature' != get_post_type() ) return;
+		if ( 'feature' != get_post_type() ) {
+            return;
+        }
 		global $post;
 
 		switch ( $column_name ) {
@@ -293,7 +300,9 @@ class Icons_For_Features_Admin {
 	 * @return void
 	 */
 	public function register_custom_column_headings ( $defaults ) {
-		if ( 'feature' != get_post_type() ) return;
+		if ( 'feature' != get_post_type() ) {
+            return;
+        }
 		$new_columns = array( 'icon' => __( 'Icon', 'icons-for-features' ) );
 
 		$last_item = '';

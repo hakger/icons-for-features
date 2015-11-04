@@ -17,7 +17,9 @@
  * @author Matty
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 
 /**
  * Returns the main instance of Icons_For_Features to prevent the need to use globals.
@@ -124,8 +126,9 @@ final class Icons_For_Features {
 	 * @return Main Icons_For_Features instance
 	 */
 	public static function instance () {
-		if ( is_null( self::$_instance ) )
+		if ( is_null( self::$_instance ) ) {
 			self::$_instance = new self();
+        }
 		return self::$_instance;
 	} // End instance()
 
@@ -190,8 +193,12 @@ final class Icons_For_Features {
 	 * @return boolean            Always return a boolean.
 	 */
 	public function override_has_post_thumbnail ( $response, $object_id, $meta_key, $single ) {
-		if ( '_thumbnail_id' != $meta_key ) return $response;
-		if ( '' != get_post_meta( intval( $object_id ), '_icon', true ) ) $response = false;
+		if ( '_thumbnail_id' != $meta_key ) {
+            return $response;
+        }
+		if ( '' != get_post_meta( intval( $object_id ), '_icon', true ) ) {
+            $response = false;
+        }
 		return $response;
 	} // End override_has_post_thumbnail()
 
@@ -216,8 +223,8 @@ final class Icons_For_Features {
 	public function add_feature_icon_placeholder ( $tpl, $args ) {
 		add_filter( 'get_post_metadata', array( $this, 'override_has_post_thumbnail' ), 10, 4 );
 
-		$tpl = str_replace( '%%IMAGE%%', '%%ICON%%%%IMAGE%%', $tpl );
-		return $tpl;
+		$result = str_replace( '%%IMAGE%%', '%%ICON%%%%IMAGE%%', $tpl );
+		return $result;
 	} // End add_feature_icon_placeholder()
 
 	/**
