@@ -246,7 +246,7 @@ final class Icons_For_Features {
 	 * @return void
 	 */
 	public function register_styles () {
-        $settings = $settings = get_option( $this->token . '-options', self::defaults() );
+        $settings = get_option( $this->token . '-options', self::defaults() );
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
         $location = $this->plugin_url . 'assets/lib/font-awesome/css/font-awesome' . $suffix . '.css';
         $dependency_pages = array($this->token . '-icons');
@@ -310,10 +310,12 @@ final class Icons_For_Features {
             $icon_color_html = 'style="color: ' . esc_attr( $icon_color ) . ';"'; 
         }
 		if ( '' != $icon ) {
+            $settings = get_option( $this->token . '-options', self::defaults() );
+            $prefix = esc_attr( isset($settings['prefix']) ? $settings['prefix'] : 'fa');
 			if ( '' != $url ) {
-				$response = '<a title="' . esc_attr ( $title ) . '" href="' . esc_url( $url ) . '"><div class="icon-preview fa ' . esc_attr( $icon ) . '" ' . $icon_color_html . '></div></a>' . "\n";
+				$response = '<a title="' . esc_attr ( $title ) . '" href="' . esc_url( $url ) . '"><div class="icon-preview ' . $prefix. ' ' . esc_attr( $icon ) . '" ' . $icon_color_html . '></div></a>' . "\n";
 			} else {
-                $response = '<div class="icon-preview fa ' . esc_attr( $icon ) . '" ' . $icon_color_html . '></div>' . "\n";
+                $response = '<div class="icon-preview ' . $prefix. ' ' . esc_attr( $icon ) . '" ' . $icon_color_html . '></div>' . "\n";
 			}
 		}
 		return (string)apply_filters( 'icons_for_features_get_the_icon_html', $response );
@@ -358,7 +360,7 @@ final class Icons_For_Features {
         return array(
           'stylesheet' => 'local',
           'stylesheet-admin' => 'same',
-          
+          'prefix' => 'fa'
         );
     }
 } // End Class
