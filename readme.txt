@@ -1,9 +1,9 @@
 === Icons for Features ===
-Contributors: woothemes,mattyza,danieldudzic
+Contributors: woothemes,mattyza,danieldudzic,johnny-bit
 Donate link: http://woothemes.com/
 Tags: features,icons,font-awesome
 Requires at least: 3.8.1
-Tested up to: 4.1.1
+Tested up to: 4.3.0
 Stable tag: 1.1.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
