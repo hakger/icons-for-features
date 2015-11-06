@@ -357,6 +357,18 @@ class Icons_For_Features_Admin {
             } else {
                 $settings['stylesheet-admin'] = 'same';
             }
+            switch ( $_POST[ $this->token . '_prefix' ] ){
+                case '':
+                    $settings['prefix'] = '';
+                    break;
+                case 'other':
+                    $settings['prefix'] = sanitize_text_field( $_POST[ $this->token . '_prefix-other' ] );
+                    break;
+                case 'fa':
+                default:
+                    $settings['prefix'] = 'fa';
+                    break;
+            }
             update_option( $this->token . '-options', $settings );
             print '<div class="updated"><p>Your settings have been saved!</p></div>';
         }
@@ -392,6 +404,25 @@ class Icons_For_Features_Admin {
                                             <label for="' . $this->token . '_adminlocation-same"><input type="radio" name="' . $this->token . '_adminlocation" id="' . $this->token . '_adminlocation-same" value="same"'.( 'same' == $settings[ 'stylesheet-admin' ] ? ' checked' : false ).'> Same setting as non-admin pages<span class="description">(if non-admin pages have "none" selected, this setting acts as "local" only for admin pages.)</span></label>
                                             <br />
                                             <label for="' . $this->token . '_adminlocation-none"><input type="radio" name="' . $this->token . '_adminlocation" id="' . $this->token . '_adminlocation-none" value="none"'.( 'none' == $settings[ 'stylesheet-admin' ] ? ' checked' : false ).'>Don&#8217;t load Font Awesome 4&#8217;s stylesheet on admin pages</label>
+                                        </fieldset>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h3>Icon Prefix</h3>
+                        <p>Select how you want icons class css prefixed (if at all):</p>
+                        <table class="form-table">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Icon css prefix:</th>
+                                    <td>
+                                        <fieldset>
+                                            <legend class="screen-reader-text"><span>Icons css prefix</span></legend>
+                                            <label for="' . $this->token . '_prefix-fa"><input type="radio" name="' . $this->token . '_prefix" id="' . $this->token . '_prefix-fa" value="fa"'.( 'fa' == $settings[ 'prefix' ] ? ' checked' : false ).'> Default Font Awesome prefix (fa) <span class="description">(default setting)</span></label>
+                                            <br />
+                                            <label for="' . $this->token . '_prefix-none"><input type="radio" name="' . $this->token . '_prefix" id="' . $this->token . '_prefix-none" value=""'.( '' == $settings[ 'prefix' ] ? ' checked' : false ).'> No prefix <span class="description">(you will have to enter prefix in icon field or use iconfont that does not require prefixing.)</span></label>
+                                            <br />
+                                            <label for="' . $this->token . '_prefix-other"><input type="radio" name="' . $this->token . '_prefix" id="' . $this->token . '_prefix-other" value="other"'.( ('' != $settings[ 'prefix' ] && 'fa' != $settings[ 'prefix' ]) ? ' checked' : false ).'> A custom prefix:</label> <input type="text" name="' . $this->token . '_prefix-other" id="' . $this->token . '_prefix-other" placeholder="Enter prefix" class="regular-text" value="'.( isset( $settings[ 'prefix' ] ) ? $settings[ 'prefix' ] : '' ).'">
                                         </fieldset>
                                     </td>
                                 </tr>
