@@ -61,6 +61,7 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 = 2.0.0
 * date(now)
 * Introduce configurable loading of stylesheets for normal/admin pages
+* Adds configurable prefix for icon fonts
 * Update FontAwesome
 
 = 1.1.0 =
