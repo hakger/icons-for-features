@@ -364,4 +364,3 @@ final class Icons_For_Features {
         );
     }
 } // End Class
-?>

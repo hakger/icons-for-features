@@ -1,5 +1,7 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
 
 /**
  * Icons_For_Features_Admin Class
@@ -312,16 +314,16 @@ class Icons_For_Features_Admin {
 
 			array_pop( $defaults );
 		}
-		$defaults = array_merge( $defaults, $new_columns );
+		$columns = array_merge( $defaults, $new_columns );
 
 		if ( $last_item != '' ) {
 			foreach ( $last_item as $k => $v ) {
-				$defaults[$k] = $v;
+				$columns[$k] = $v;
 				break;
 			}
 		}
 
-		return $defaults;
+		return $columns;
 	} // End register_custom_column_headings()
     
     /**
