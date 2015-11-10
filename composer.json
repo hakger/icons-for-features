@@ -1,0 +1,9 @@
+{
+    "name": "hakger/icons-for-features",
+    "version": "2.0.0",
+    "require": {
+        "composer/installers": "~1.0"
+    },
+    "type": "wordpress-plugin",
+    "homepage": "https://wordpress.org/plugins/icons-for-features/"
+}
